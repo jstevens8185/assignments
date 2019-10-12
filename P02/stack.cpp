@@ -1,4 +1,4 @@
-/**
+/*
  * File: stack.cpp
  * Aurhor: Jered Stevens / Terry Griffin
  * Course: CMPS 1063 - Fall 2019
@@ -9,9 +9,12 @@
 
 #include <iostream>
 #include "stack.h"
+#include <fstream>
+#include <string>
 using namespace std;
 
-/**
+
+/*
  * Stack constructor
  * Description:
  *    Inits an array of ints and sets our top
@@ -38,6 +41,7 @@ Stack::Stack(int s){
   Size = s;
   A = new int [Size];
   Top = -1;
+  Largest = Size;
 }
 
 /**
@@ -64,7 +68,7 @@ bool Stack::Push(int val){
  * Description:
  *    Removes top of stack and returns it
  * Params:
- *    void
+ *    ofstream* out
  * Returns:
  *     int : item on stack
  */
@@ -77,8 +81,8 @@ int Stack::Pop(){
     Top--;
     return temp;
   }else{
-    // should return a value that implies failuer, but good enough for now
-  std::cout<<"Cannot remove item from empty stack"<<endl;
+    // should return a value that implies failure
+    cout<<"Cannot remove item from empty stack"<<endl;
   }
   return 0;
 }
@@ -88,17 +92,18 @@ int Stack::Pop(){
  * Description:
  *    Prints stack for inspection
  * Params:
- *    void
+ *    ofstream
  * Returns:
  *     void
  */
-void Stack::Print(){
-  cout << "Top: " << A[Top] << endl;
-  cout << "Largest Size: " << Largest << endl;
-  cout << "Stack Size: " << Size <<endl;
+void Stack::Print(ofstream &outf){
+  outf << "Top: " << Top << endl;
+  outf << "Value @ Top: " << A[Top] << endl;
+  outf << "Largest Size: " << Largest << endl;
+  outf << "Stack Size: " << Size <<endl;
   
   for(int i = Top;i>=0 ; i--){
-    cout<<A[i]<<endl;
+    outf <<A[i]<<endl;
   }
 }
 
@@ -198,7 +203,7 @@ void Stack::Reduce(){
       //cout << smallerArray[i]<<endl;
     }
   
-    // cout<<"Reduce was called" << endl << endl;
+    //cout<<"Reduce was called" << endl << endl;
     // cout << "Top is: " << A[Top] << endl;
 
     int* temp = A;                    //<-Here is the problem*
@@ -207,7 +212,7 @@ void Stack::Reduce(){
     return;
     }
     else if(!Enlarged){
-      std::cout << "Stack has not been enlarged" << endl;
+      //cout << "Stack has not been enlarged" << endl;
       return;
     }
     else
@@ -215,7 +220,15 @@ void Stack::Reduce(){
     return;
 }
 
-// Prints error Message
+/**
+ * Error
+ * Description:
+ *    Dispays error message
+ * Params:
+ *    void
+ * Returns:
+ *    
+ */
 void Stack::Error(){
     cout << "There was an error\n\n";
     return;
@@ -246,3 +259,40 @@ void Stack::checkResize(){
         return;
     }
 }  
+
+/**
+ * LoadFile
+ * Description:
+ *    Loads input file to be read
+ * Params:
+ *    void
+ * Returns:
+ *    
+ */
+void Stack::LoadFile(){
+  ifstream in;
+  in.open("input_data.txt");
+  ofstream out;
+  out.open("stack_out.txt");
+  ofstream* ptrOut = &out;
+
+    // Load the stack from infile
+  while(!in.eof()){
+    int counter = 0;
+    if(counter % 3 == 0){
+      checkResize();
+    }
+    counter++;
+    int data;
+    string useless;
+    in >> useless >> data;
+    if(data > 0){
+      Push(data);
+      //cout << "data is: " << data << endl;
+    }
+    else{
+    Pop();
+    }
+ }
+  return;
+}
