@@ -1,6 +1,6 @@
 /**
  * File: main.cpp
- * Author: Jered Stevens / Terry Griffin
+ * Author: Jered Stevens
  * Course: CMPS 1063 - Fall 2019
  * Date: 10/10/2019
  * Description:
