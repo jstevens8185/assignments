@@ -6,6 +6,10 @@
  * Description:
  *    Definition of our stack class.
  */
+#include<fstream>
+#include<iostream>
+
+using namespace std;
 
 class Stack{
   private:
@@ -21,11 +25,12 @@ class Stack{
     Stack(int);             // overloaded constructor
     bool Push(int);         // Push value onto stack
     int Pop();              // Remove item from top of stack
-    void Print();           // Help inspect values
+    void Print(ofstream &);           // Help inspect values
     bool Empty();           // Is stack empty
     bool Full();            // is stack full
     void checkResize();     // Is stack near capacity
     void Enlarge();         // Make it bigger
     void Reduce();          // Make it smaller
     void Error();           // Prints Error Message
+    void LoadFile();        // Reads input
 };

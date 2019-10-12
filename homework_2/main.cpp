@@ -1,6 +1,6 @@
 /**
  * File: main.cpp
- * Author: Jered Stevens / Terry Griffin
+ * Author: Jered Stevens
  * Course: CMPS 1063 - Fall 2019
  * Date: 10/10/2019
  * Description:
@@ -11,48 +11,32 @@
 #include "stack.h"
 #include "stdlib.h"
 #include <fstream>
+#include <string>
 
 using namespace std;
+
 
 /**
  * Main Program
  * 
  */
 int main() {
-  //srand(34234); // seed random number gen
-  
+  ifstream in;
+  in.open("input_data.txt");
+  ofstream out;
+  out.open("stack_out.txt");
 
-  Stack S1; // Instance of our stack default constructor
- // Stack S2(200);  // Instance of our stack specified size
+  //Header
+  out << "Jered Stevens" << endl
+      << "10/10/2019" << endl
+      << "Griffin" << endl
+      << "Homework 2\n\n";
 
-  // Load the stack with random nums
-  // for (int i = 0; i <= 95; i++) {
-  //   S1.Push(i);
-  // }
-
-  // make sure it looks correct
-  //S1.Print();
-  //cout << endl;
-
- //Pop some items off the top  
-  // S1.Pop();
-  // S1.Pop();
-  // S1.Pop();
-  // S1.Pop();
-
-  // cout << endl;
-  
-   S1.checkResize();
-
-  //Pop some to reduce the size
-   for (int i = 0; i <= 80; i++) {
-     S1.Pop();
-   }
-  
-  //Test reduce
-  S1.checkResize();
-
-  // Check for correct behavior again
-  S1.Print();
+ 
+ 
+  Stack S2(10);  // Instance of our stack specified size
+  S2.LoadFile();
+  S2.Print(out);
   return 0;
 }
+
