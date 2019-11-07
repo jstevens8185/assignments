@@ -1,3 +1,15 @@
+/**********************************************
+* Jered Stevens
+* HomeWork 5
+* 
+* Description:
+* Program creates a list of words and 
+* is able to sort the list into alphabetical
+* order
+***********************************************
+* Debugged ReOrder() function
+***********************************************/
+
 #include <iostream>
 #include <string>
 #include <fstream> 
